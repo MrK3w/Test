@@ -1,8 +1,74 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model ValuesWithWeather
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>
+                Time
+            </th>
+            <th>
+                Temperature
+            </th>
+            <th>
+                Wind speed
+            </th>
+            <th>
+                Cloud
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var weather in Model.record)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => weather.Timestamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => weather.Temp2m)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => weather.Wind10mSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => weather.Cloucover)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <table id="myTable" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>
+                Average temperature 
+            </th>
+            <th>
+                Min cloud
+            </th>
+            <th>
+                Max Wind speed
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>
+            @Html.DisplayFor(x => Model.values.averageTemperature)
+        </td>
+        <td>
+            @Html.DisplayFor(x => Model.values.minCloud)
+        </td>
+        <td>
+            @Html.DisplayFor(x => Model.values.maxWind)
+        </td>
+        </tbody>
+    </table>
 </div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,7 +24,14 @@ namespace WebApplication.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            Values values = new Values();
+            values.averageTemperature = (int)weather.weathers.Average(x => x.Temp2m);
+            values.maxWind = weather.weathers.Max(x => x.Wind10mSpeed);
+            values.minCloud = weather.weathers.Min(x => x.Cloucover);
+            ValuesWithWeather valuesWithWeather = new ValuesWithWeather();
+            valuesWithWeather.values = values;
+            valuesWithWeather.record = weather.weathers;
+            return View(valuesWithWeather);
         }
 
         public IActionResult Privacy()
